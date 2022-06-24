@@ -1,0 +1,8 @@
+package com.hj.core;
+
+/**
+ * 位置 垂直 水平 etc.
+ */
+public enum WaveMarkPosition {
+    ALIGN_LEFT,ALIGN_CENTER,ALIGN_RIGHT,ALIGN_JUSTIFIED,ALIGN_TOP,ALIGN_MIDDLE,ALIGN_BOTTOM,ALIGN_BASELINE,ALIGN_JUSTIFIED_ALL
+}
