@@ -21,6 +21,12 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor {
 
     Logger logger = LoggerFactory.getLogger(AddWaterMarkAdvisor.class);
 
+    private final String TOMCAT_TEMP_FILE = "part.fileItem.dfos.outputFile";
+
+    /**
+     * 本地缓存路径
+     */
+    private final String TEMP_PATH = AddWaterMarkAdvisor.class.getClassLoader().getResource("").getPath();
 
     /*  完成 spel 解析 与 MultiFile 文件替换  */
 
@@ -31,7 +37,11 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor {
             @Override
             public void before(Method method, Object[] args, Object target) throws Throwable {
 
-                System.out.println(method.getName());
+                //解析注解属性
+                AddWaterMark annotation = method.getAnnotation(AddWaterMark.class);
+                String content = annotation.content();
+                String whetherAdd = annotation.whetherAdd();
+                //todo 解析spel获取对应信息
 
                 for (Object arg : args) {
                     if (arg instanceof MultipartFile) {
@@ -40,13 +50,12 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor {
                         // 实现动态替换 File
                         MetaObject metaObject = SystemMetaObject.forObject(multipartFile);
                         //删除原来的缓存文件
-                        File file = (File) metaObject.getValue("part.fileItem.dfos.outputFile");
+                        File file = (File) metaObject.getValue(TOMCAT_TEMP_FILE);
                         com.hj.core.AddWaterMark addWaterMark = new PdfAddWaterMark(new WaterMarkAttribute());
-                        addWaterMark.transfer(file.getPath(),"/Users/hejie/Desktop/temp.pdf","11111");
+                        //todo 水印内容
+                        addWaterMark.transfer(file.getPath(),TEMP_PATH+multipartFile.getName(),"11111");
                         file.delete();
-
-
-                        metaObject.setValue("part.fileItem.dfos.outputFile", new File("/Users/hejie/Desktop/temp.pdf"));
+                        metaObject.setValue(TOMCAT_TEMP_FILE, new File(TEMP_PATH+multipartFile.getName()));
 
                     }
 
@@ -89,7 +98,7 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor {
 
                     @Override
                     public boolean matches(Method method, Class<?> targetClass, Object[] args) {
-                        return true;
+                        return method.getAnnotation(AddWaterMark.class) != null;
                     }
 
                 };
