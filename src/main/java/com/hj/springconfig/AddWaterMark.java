@@ -20,10 +20,11 @@ public @interface AddWaterMark {
      */
     String whetherAdd() default "";
 
-
     /**
      * 增加内容 spel 解析出 String 值
      */
     String content();
+
+    // todo 增加水印属性
 
 }

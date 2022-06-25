@@ -27,7 +27,7 @@ public class PdfAddWaterMark implements AddWaterMark {
 
 
     public PdfAddWaterMark() {
-
+            init();
     }
 
     public PdfAddWaterMark(WaterMarkAttribute waterMarkAttribute) {
@@ -37,10 +37,11 @@ public class PdfAddWaterMark implements AddWaterMark {
 
     @Override
     public void init() {
+        this.waterMarkAttribute = new WaterMarkAttribute();
     }
 
     @Override
-    public void transfer(String sourcePath, String targetPath, String WaterMarkContent) throws DocumentException, IOException {
+    public void transfer(String sourcePath, String targetPath, String waterMarkContent) throws DocumentException, IOException {
         PdfReader reader = new PdfReader(sourcePath);
         PdfStamper stamper = new PdfStamper(reader, new FileOutputStream(targetPath));
         PdfGState gs = new PdfGState();
@@ -58,7 +59,7 @@ public class PdfAddWaterMark implements AddWaterMark {
             content.setColorFill(waterMarkAttribute.getColor()==null?BaseColor.GRAY:convert.convert(waterMarkAttribute.getColor()));
             content.setFontAndSize(font, waterMarkAttribute.getFontSize()==null?56:waterMarkAttribute.getFontSize()); //水印字体样式和大小
             //水印内容和水印位置
-            content.showTextAligned(Element.ALIGN_CENTER,WaterMarkContent,
+            content.showTextAligned(Element.ALIGN_CENTER,waterMarkContent,
                     waterMarkAttribute.getX()==null?300:waterMarkAttribute.getX(),
                     waterMarkAttribute.getY()==null?300:waterMarkAttribute.getY(),
                     waterMarkAttribute.getRotation()==null?30:waterMarkAttribute.getRotation());

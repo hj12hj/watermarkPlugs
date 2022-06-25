@@ -1,6 +1,7 @@
 package com.hj.springconfig;
 
 
+import com.hj.AddWaterMarkUtil;
 import com.hj.core.WaterMarkAttribute;
 import com.hj.pdf.PdfAddWaterMark;
 import org.aopalliance.aop.Advice;
@@ -114,11 +115,11 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor, ApplicationContextA
                             MetaObject metaObject = SystemMetaObject.forObject(multipartFile);
                             //删除原来的缓存文件
                             File file = (File) metaObject.getValue(TOMCAT_TEMP_FILE);
-                            com.hj.core.AddWaterMark addWaterMark = new PdfAddWaterMark(new WaterMarkAttribute());
+                            com.hj.core.AddWaterMark addWaterMark = new AddWaterMarkUtil();
                             //todo 水印内容
-                            addWaterMark.transfer(file.getPath(), TEMP_PATH + multipartFile.getName(), contentValue);
+                            addWaterMark.transfer(file.getPath(), TEMP_PATH + multipartFile.getOriginalFilename(), contentValue);
                             file.delete();
-                            metaObject.setValue(TOMCAT_TEMP_FILE, new File(TEMP_PATH + multipartFile.getName()));
+                            metaObject.setValue(TOMCAT_TEMP_FILE, new File(TEMP_PATH + multipartFile.getOriginalFilename()));
                         }
                     }
 

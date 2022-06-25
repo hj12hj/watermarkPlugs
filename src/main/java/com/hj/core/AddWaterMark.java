@@ -17,9 +17,9 @@ public interface AddWaterMark {
      * 转换
      * @param sourcePath
      * @param targetPath
-     * @param WaterMarkContent
+     * @param waterMarkContent
      * @throws DocumentException
      * @throws IOException
      */
-    void transfer(String sourcePath,String targetPath,String WaterMarkContent) throws DocumentException, IOException;
+    void transfer(String sourcePath,String targetPath,String waterMarkContent) throws DocumentException, IOException;
 }
