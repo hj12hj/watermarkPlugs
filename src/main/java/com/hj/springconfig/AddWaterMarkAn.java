@@ -14,7 +14,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Indexed
-public @interface AddWaterMark {
+public @interface AddWaterMarkAn {
     /**
      * 是否增加 spel 解析出 bool 值
      */

@@ -2,8 +2,7 @@ package com.hj.springconfig;
 
 
 import com.hj.AddWaterMarkUtil;
-import com.hj.core.WaterMarkAttribute;
-import com.hj.pdf.PdfAddWaterMark;
+import com.hj.core.AddWaterMark;
 import org.aopalliance.aop.Advice;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
@@ -40,6 +39,13 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor, ApplicationContextA
 
     /*  完成 spel 解析 与 MultiFile 文件替换  */
 
+    private com.hj.core.AddWaterMark addWaterMark;
+
+
+
+    public AddWaterMarkAdvisor(com.hj.core.AddWaterMark addWaterMark) {
+        this.addWaterMark = addWaterMark;
+    }
 
     /**
      * 获取参数容器
@@ -93,9 +99,8 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor, ApplicationContextA
 
             @Override
             public void before(Method method, Object[] args, Object target) throws Throwable {
-
                 //解析注解属性
-                AddWaterMark annotation = method.getAnnotation(AddWaterMark.class);
+                AddWaterMarkAn annotation = method.getAnnotation(AddWaterMarkAn.class);
                 String content = annotation.content();
                 String whetherAdd = annotation.whetherAdd();
                 //得到spel上下文
@@ -115,7 +120,7 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor, ApplicationContextA
                             MetaObject metaObject = SystemMetaObject.forObject(multipartFile);
                             //删除原来的缓存文件
                             File file = (File) metaObject.getValue(TOMCAT_TEMP_FILE);
-                            com.hj.core.AddWaterMark addWaterMark = new AddWaterMarkUtil();
+                            AddWaterMark addWaterMark = new AddWaterMarkUtil();
                             //todo 水印内容
                             addWaterMark.transfer(file.getPath(), TEMP_PATH + multipartFile.getOriginalFilename(), contentValue);
                             file.delete();
@@ -151,7 +156,7 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor, ApplicationContextA
 
                     @Override
                     public boolean matches(Method method, Class<?> targetClass) {
-                        return method.getAnnotation(AddWaterMark.class) != null;
+                        return method.getAnnotation(AddWaterMarkAn.class) != null;
                     }
 
                     @Override
@@ -161,7 +166,7 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor, ApplicationContextA
 
                     @Override
                     public boolean matches(Method method, Class<?> targetClass, Object[] args) {
-                        return method.getAnnotation(AddWaterMark.class) != null;
+                        return method.getAnnotation(AddWaterMarkAn.class) != null;
                     }
 
                 };
