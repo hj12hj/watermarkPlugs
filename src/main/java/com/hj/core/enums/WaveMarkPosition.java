@@ -1,4 +1,4 @@
-package com.hj.core;
+package com.hj.core.enums;
 
 /**
  * 位置 垂直 水平 etc.

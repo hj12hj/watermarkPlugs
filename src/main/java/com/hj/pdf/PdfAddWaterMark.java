@@ -1,7 +1,7 @@
 package com.hj.pdf;
 
 import com.hj.core.AddWaterMark;
-import com.hj.core.ColorConvert;
+import com.hj.core.converters.ColorConvert;
 import com.hj.core.WaterMarkAttribute;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.DocumentException;

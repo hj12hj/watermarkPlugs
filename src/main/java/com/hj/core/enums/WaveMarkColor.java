@@ -1,4 +1,4 @@
-package com.hj.core;
+package com.hj.core.enums;
 
 
 /**

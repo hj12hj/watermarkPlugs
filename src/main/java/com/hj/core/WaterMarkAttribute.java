@@ -1,5 +1,7 @@
 package com.hj.core;
 
+import com.hj.core.enums.WaveMarkColor;
+
 /**
  * 水印属性
  */

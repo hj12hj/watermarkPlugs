@@ -1,7 +1,7 @@
 package com.hj.pdf;
 
-import com.hj.core.WaveMarkColor;
-import com.hj.core.ColorConvert;
+import com.hj.core.enums.WaveMarkColor;
+import com.hj.core.converters.ColorConvert;
 import com.itextpdf.text.BaseColor;
 
 /**
