@@ -10,3 +10,20 @@
 扩展点:
         利用增加自定义的格式的 AddWaterMarkUtil.addWaterMarkMap.put("111",new PdfAddWaterMark());
         实现 AddWaterMark接口
+
+
+如下使用注解 @AddWaterMarkAn 后 file.transferTo 保存的文件已经加了水印 
+
+@RestController
+public class Controller {
+
+
+
+    @GetMapping("/hh")
+    @AddWaterMarkAn(whetherAdd = "#fileDto.flag",content = "#fileDto.content")
+    public void hh(@RequestParam("hh")MultipartFile file,FileDto fileDto) throws IOException {
+        file.transferTo(new File("/Users/hejie/Desktop/1234.docx"));
+
+    }
+
+}
