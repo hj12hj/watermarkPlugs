@@ -65,7 +65,6 @@ public class AddWaterMarkInterceptor implements HandlerInterceptor {
                 boolean containsKey = AddWaterMarkUtil.getAddWaterMarkMap().containsKey(suffix);
                 if (!containsKey)
                     return true;
-
                 //这里实现文件替换操作
                 // 实现动态替换 File
                 MetaObject metaObject = SystemMetaObject.forObject(multipartFile);
@@ -77,8 +76,6 @@ public class AddWaterMarkInterceptor implements HandlerInterceptor {
                 addWaterMark.transfer(file.getPath(), TEMP_PATH + multipartFile.getOriginalFilename(), contentValue);
                 file.delete();
                 metaObject.setValue(TOMCAT_TEMP_FILE, new File(TEMP_PATH + multipartFile.getOriginalFilename()));
-
-
             }
 
         }
