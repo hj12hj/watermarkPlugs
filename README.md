@@ -59,5 +59,8 @@ Controller层:
                 wordAddWaterMark.setPicPath("/Users/hejie/Desktop/12.png");
                 wordAddWaterMark.transfer("/Users/hejie/Desktop/12.docx","/Users/hejie/Desktop/1111.docx","22222");
 
+可能遇到问题：
+        无法引入 spire.doc maven的settings配置文件里把mirrors和profiles节点都注释了,重新拉取
+
 
 
