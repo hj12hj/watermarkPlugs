@@ -18,7 +18,7 @@ import java.nio.file.Path;
 import java.util.stream.Stream;
 
 /**
- * poi 实现 暂时没有添加图片水印
+ * poi 实现docx 暂时没有添加图片水印
  */
 @Deprecated
 public class WordAddWaterMarkPoi implements AddWaterMark {

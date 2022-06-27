@@ -34,7 +34,11 @@ Controller层:
                 addWaterMark:
                         enable: true
                         interceptor: true
-
+        前端传入参数:
+                        flag:true
+                        content:xxx
+                        picPath:图片路径
+                        mode:pic   //模式
 Controller层:
         @PostMapping("/hh")
         public void hh(HttpServletRequest httpServletRequest) throws IOException {
