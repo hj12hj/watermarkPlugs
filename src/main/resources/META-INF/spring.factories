@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.hj.springconfig.AutoConfig
+com.hj.aop.AutoConfig

@@ -14,7 +14,6 @@
     </properties>
 
 
-
     <dependencies>
 
         <dependency>
@@ -47,7 +46,6 @@
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
         </dependency>
-
 
 
         <dependency>
@@ -108,6 +106,44 @@
             <version>5.2.12.RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>e-iceblue</groupId>
+            <artifactId>spire.doc</artifactId>
+            <version>5.1.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.2.12.RELEASE</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>9.0.41</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.28</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.7.19</version>
+        </dependency>
     </dependencies>
+
+
+    <!--    pom仓库 拉取时候把 maven settings 里的镜像 注释掉 -->
+    <repositories>
+        <repository>
+            <id>com.e-iceblue</id>
+            <url>https://repo.e-iceblue.cn/repository/maven-public/</url>
+        </repository>
+    </repositories>
 
 </project>

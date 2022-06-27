@@ -1,6 +1,7 @@
-package com.hj.springconfig;
+package com.hj.aop;
 
 
+import com.hj.core.enums.WaveMarkMode;
 import org.springframework.stereotype.Indexed;
 
 import java.lang.annotation.*;
@@ -24,6 +25,17 @@ public @interface AddWaterMarkAn {
      * 增加内容 spel 解析出 String 值
      */
     String content();
+
+    /**
+     * 模式
+     */
+    WaveMarkMode mode() default WaveMarkMode.WORDS;
+
+    /**
+     * 模式
+     */
+    String  picPath() default "";
+
 
     // todo 增加水印属性
 

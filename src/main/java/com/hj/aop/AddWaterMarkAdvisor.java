@@ -1,8 +1,9 @@
-package com.hj.springconfig;
+package com.hj.aop;
 
 
 import com.hj.AddWaterMarkUtil;
 import com.hj.core.AddWaterMark;
+import com.hj.core.enums.WaveMarkMode;
 import org.aopalliance.aop.Advice;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
@@ -39,11 +40,11 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor, ApplicationContextA
 
     /*  完成 spel 解析 与 MultiFile 文件替换  */
 
-    private com.hj.core.AddWaterMark addWaterMark;
+    private AddWaterMark addWaterMark;
 
 
 
-    public AddWaterMarkAdvisor(com.hj.core.AddWaterMark addWaterMark) {
+    public AddWaterMarkAdvisor(AddWaterMark addWaterMark) {
         this.addWaterMark = addWaterMark;
     }
 
@@ -105,9 +106,13 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor, ApplicationContextA
                 String whetherAdd = annotation.whetherAdd();
                 //得到spel上下文
                 EvaluationContext context = getContext(args, method);
-                //todo 解析spel获取对应信息
                 //是否要加水印
                 Boolean whetherAddValue = getValue(context, whetherAdd, Boolean.class);
+
+                WaveMarkMode mode = annotation.mode();
+                String picPath = annotation.picPath();
+
+
                 //需要则完成替换逻辑 否则跳过
                 if (whetherAddValue) {
                     //内容
@@ -115,13 +120,22 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor, ApplicationContextA
                     for (Object arg : args) {
                         if (arg instanceof MultipartFile) {
                             MultipartFile multipartFile = (MultipartFile) arg;
+
+                            //这里遇到不支持的类型直接返回
+                            String originalFilename = multipartFile.getOriginalFilename();
+                            String suffix = originalFilename.split("\\.")[1];
+                            boolean containsKey = AddWaterMarkUtil.getAddWaterMarkMap().containsKey(suffix);
+                            if (!containsKey)
+                                return;
+
                             //这里实现文件替换操作
                             // 实现动态替换 File
                             MetaObject metaObject = SystemMetaObject.forObject(multipartFile);
                             //删除原来的缓存文件
                             File file = (File) metaObject.getValue(TOMCAT_TEMP_FILE);
-                            AddWaterMark addWaterMark = new AddWaterMarkUtil();
-                            //todo 水印内容
+                            //todo 属性设置
+                            addWaterMark.setWaveMarkMode(mode);
+                            addWaterMark.setPicPath(picPath);
                             addWaterMark.transfer(file.getPath(), TEMP_PATH + multipartFile.getOriginalFilename(), contentValue);
                             file.delete();
                             metaObject.setValue(TOMCAT_TEMP_FILE, new File(TEMP_PATH + multipartFile.getOriginalFilename()));

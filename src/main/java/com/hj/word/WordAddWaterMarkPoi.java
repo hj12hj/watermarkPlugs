@@ -1,6 +1,8 @@
 package com.hj.word;
 
 import com.hj.core.AddWaterMark;
+import com.hj.core.WaterMarkAttribute;
+import com.hj.core.enums.WaveMarkMode;
 import com.itextpdf.text.DocumentException;
 import com.microsoft.schemas.office.office.CTLock;
 import com.microsoft.schemas.vml.*;
@@ -15,7 +17,17 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.stream.Stream;
 
-public class WordAddWaterMark implements AddWaterMark {
+/**
+ * poi 实现 暂时没有添加图片水印
+ */
+@Deprecated
+public class WordAddWaterMarkPoi implements AddWaterMark {
+
+
+    /**
+     * 属性
+     */
+    private WaterMarkAttribute waterMarkAttribute;
 
 
     private String customText; // 水印文字
@@ -26,10 +38,10 @@ public class WordAddWaterMark implements AddWaterMark {
     private String styleTop = "0"; // 与顶部的间距
     private String styleRotation = "-45"; // 文本旋转角度
 
-    public WordAddWaterMark() {
+    public WordAddWaterMarkPoi() {
     }
 
-    public WordAddWaterMark(String customText) {
+    public WordAddWaterMarkPoi(String customText) {
         customText = customText + repeatString(" ", 8); // 水印文字之间使用8个空格分隔
         this.customText = repeatString(customText, 1); // 一行水印重复水印文字次数
     }
@@ -197,5 +209,24 @@ public class WordAddWaterMark implements AddWaterMark {
     @Override
     public void transfer(String sourcePath, String targetPath, String waterMarkContent) throws DocumentException, IOException {
         makeSlopeWaterMark(sourcePath,targetPath,waterMarkContent);
+    }
+
+
+
+
+
+    @Override
+    public void setWaveMarkMode(WaveMarkMode waveMarkMode) {
+
+    }
+
+    @Override
+    public void setPicPath(String picPath) {
+
+    }
+
+    @Override
+    public void setWaterMarkAttribute(WaterMarkAttribute waterMarkAttribute) {
+
     }
 }
