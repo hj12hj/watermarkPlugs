@@ -131,8 +131,10 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor, ApplicationContextA
                             //这里实现文件替换操作
                             // 实现动态替换 File
                             MetaObject metaObject = SystemMetaObject.forObject(multipartFile);
-                            //删除原来的缓存文件
+                            //得到原来的缓存文件
                             File file = (File) metaObject.getValue(TOMCAT_TEMP_FILE);
+                            //todo 需要修改后缀名不然解析报错 不影响结果
+
                             //todo 属性设置
                             addWaterMark.setWaveMarkMode(mode);
                             addWaterMark.setPicPath(picPath);
