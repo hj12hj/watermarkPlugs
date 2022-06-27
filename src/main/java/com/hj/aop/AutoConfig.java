@@ -23,7 +23,7 @@ public class AutoConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        if (environment.getProperty("addWaterMark.interceptor")!=null&&environment.getProperty("addWaterMark.interceptor").equals(true)) {
+        if ("true".equals(environment.getProperty("addWaterMark.interceptor"))) {
             registry.addInterceptor(getAddWaterMarkInterceptor()).addPathPatterns("/**");
         }
     }

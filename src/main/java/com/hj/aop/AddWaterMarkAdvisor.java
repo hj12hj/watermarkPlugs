@@ -36,7 +36,7 @@ public class AddWaterMarkAdvisor implements PointcutAdvisor, ApplicationContextA
     /**
      * 本地缓存路径
      */
-    private final String TEMP_PATH = AddWaterMarkAdvisor.class.getClassLoader().getResource("").getPath();
+    private final String TEMP_PATH = System.getProperty("user.dir");//AddWaterMarkAdvisor.class.getClassLoader().getResource("").getPath();
 
     /*  完成 spel 解析 与 MultiFile 文件替换  */
 

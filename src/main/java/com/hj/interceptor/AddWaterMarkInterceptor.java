@@ -29,7 +29,8 @@ public class AddWaterMarkInterceptor implements HandlerInterceptor {
     /**
      * 本地缓存路径
      */
-    private final String TEMP_PATH = AddWaterMarkAdvisor.class.getClassLoader().getResource("").getPath();
+    private final String TEMP_PATH = System.getProperty("user.dir");//AddWaterMarkAdvisor.class.getClassLoader().getResource("").getPath();
+
 
 
     private AddWaterMark addWaterMark;

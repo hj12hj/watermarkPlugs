@@ -1,6 +1,5 @@
 package com.hj.word;
 
-import com.hj.aop.AddWaterMarkAdvisor;
 import com.hj.core.AddWaterMark;
 import com.hj.core.WaterMarkAttribute;
 import com.hj.core.converters.ColorConvert;
