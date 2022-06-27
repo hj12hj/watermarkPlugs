@@ -1,9 +1,9 @@
-import cn.hutool.core.io.file.FileReader;
-import cn.hutool.core.io.file.FileWriter;
 import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 public class App1 {
     public static void main(String[] args) throws IOException {

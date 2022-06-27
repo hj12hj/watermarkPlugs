@@ -1,7 +1,6 @@
 package com.hj.word;
 
-import cn.hutool.core.io.file.FileReader;
-import cn.hutool.core.io.file.FileWriter;
+
 import com.hj.core.AddWaterMark;
 import com.hj.core.WaterMarkAttribute;
 import com.hj.core.converters.ColorConvert;
