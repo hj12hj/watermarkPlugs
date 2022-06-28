@@ -43,4 +43,11 @@ public interface AddWaterMark {
      * @param waterMarkAttribute
      */
     void setWaterMarkAttribute(WaterMarkAttribute waterMarkAttribute);
+
+    /**
+     * 移除添加的水印
+     * @param sourcePath
+     * @param targetPath
+     */
+    void removeWaterMark(String sourcePath, String targetPath);
 }

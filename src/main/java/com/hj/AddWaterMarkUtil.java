@@ -89,4 +89,16 @@ public class AddWaterMarkUtil implements AddWaterMark {
         });
     }
 
+    @Override
+    public void removeWaterMark(String sourcePath, String targetPath) {
+        String[] split = targetPath.split(File.separator);
+        String fileName = split[split.length - 1];
+        String suffix = fileName.split("\\.")[1];
+        AddWaterMark addWaterMark = addWaterMarkMap.get(suffix);
+        if (addWaterMark == null) {
+            throw new RuntimeException("暂不支持此种类型文件水印删除");
+        }
+        addWaterMark.removeWaterMark(sourcePath, targetPath);
+    }
+
 }

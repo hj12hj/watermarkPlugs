@@ -145,6 +145,11 @@ public class PdfAddWaterMark implements AddWaterMark {
         this.waterMarkAttribute = waterMarkAttribute;
     }
 
+    @Override
+    public void removeWaterMark(String sourcePath, String targetPath) {
+
+    }
+
     public WaveMarkMode getWaveMarkMode() {
         return waveMarkMode;
     }

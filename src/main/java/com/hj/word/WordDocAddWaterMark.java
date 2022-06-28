@@ -152,4 +152,16 @@ public class WordDocAddWaterMark implements AddWaterMark {
     public void setWaterMarkAttribute(WaterMarkAttribute waterMarkAttribute) {
         this.waterMarkAttribute = waterMarkAttribute;
     }
+
+    @Override
+    public void removeWaterMark(String sourcePath, String targetPath) {
+        //创建 Document 的对象
+        Document document = new Document();
+        //从磁盘加载 Word 文档
+        document.loadFromFile(sourcePath);
+        //将水印值设置为 null 以移除水印
+        document.setWatermark(null);
+        //保存 Word 文档
+        document.saveToFile(targetPath, FileFormat.Doc);
+    }
 }

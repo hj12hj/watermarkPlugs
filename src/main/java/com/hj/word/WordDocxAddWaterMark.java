@@ -43,7 +43,7 @@ public class WordDocxAddWaterMark implements AddWaterMark {
     }
 
     /**
-     *  spire.doc 首行会有警告 这里去掉
+     * spire.doc 首行会有警告 这里去掉
      */
     private void removeWarnings(String path) throws IOException {
         InputStream is = new FileInputStream(path);
@@ -70,7 +70,7 @@ public class WordDocxAddWaterMark implements AddWaterMark {
             insertTextWatermark(document.getSections().get(0), waterMarkContent);
             document.saveToFile(targetPath, FileFormat.Docx);
             removeWarnings(targetPath);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.error(e.getMessage());
         }
     }
@@ -79,19 +79,19 @@ public class WordDocxAddWaterMark implements AddWaterMark {
      * 图片水印
      */
     private void transferPic(String sourcePath, String targetPath) {
-      try {
-          Document document = new Document();
-          document.loadFromFile(sourcePath);
-          PictureWatermark picture = new PictureWatermark();
-          picture.setPicture(picPath);
-          picture.setScaling(200);
-          picture.isWashout(false);
-          document.setWatermark(picture);
-          document.saveToFile(targetPath, FileFormat.Docx);
-          removeWarnings(targetPath);
-      }catch (Exception e){
-          logger.error(e.getMessage());
-      }
+        try {
+            Document document = new Document();
+            document.loadFromFile(sourcePath);
+            PictureWatermark picture = new PictureWatermark();
+            picture.setPicture(picPath);
+            picture.setScaling(200);
+            picture.isWashout(false);
+            document.setWatermark(picture);
+            document.saveToFile(targetPath, FileFormat.Docx);
+            removeWarnings(targetPath);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        }
     }
 
     private void insertTextWatermark(Section section, String waterMarkContent) {
@@ -139,5 +139,17 @@ public class WordDocxAddWaterMark implements AddWaterMark {
     @Override
     public void setWaterMarkAttribute(WaterMarkAttribute waterMarkAttribute) {
         this.waterMarkAttribute = waterMarkAttribute;
+    }
+
+    @Override
+    public void removeWaterMark(String sourcePath, String targetPath) {
+        //创建 Document 的对象
+        Document document = new Document();
+        //从磁盘加载 Word 文档
+        document.loadFromFile(sourcePath);
+        //将水印值设置为 null 以移除水印
+        document.setWatermark(null);
+        //保存 Word 文档
+        document.saveToFile(targetPath, FileFormat.Docx);
     }
 }

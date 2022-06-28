@@ -229,4 +229,9 @@ public class WordAddWaterMarkPoi implements AddWaterMark {
     public void setWaterMarkAttribute(WaterMarkAttribute waterMarkAttribute) {
 
     }
+
+    @Override
+    public void removeWaterMark(String sourcePath, String targetPath) {
+
+    }
 }
