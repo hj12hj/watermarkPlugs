@@ -1,4 +1,4 @@
-package com.hj.aop;
+package com.hj.advisor;
 
 import com.hj.AddWaterMarkUtil;
 import com.hj.core.AddWaterMark;

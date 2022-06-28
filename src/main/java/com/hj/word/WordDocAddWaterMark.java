@@ -48,7 +48,7 @@ public class WordDocAddWaterMark implements AddWaterMark {
      * spire.doc 首行会有警告 这里去掉
      *  个别文件这里存在问题
      */
-    // TODO aop或者拦截器里操作Tomcat缓存路径下的文件  xxx.tmp 这里存在问题 无法去掉第一行的警告
+    // TODO 部分 doc 格式去掉首行警告问题存在问题
     private void removeWarnings(String path) throws IOException {
         FileInputStream inputStream = new FileInputStream(new File(path));
         HWPFDocument hwpfDocument = new HWPFDocument(inputStream);
@@ -59,6 +59,7 @@ public class WordDocAddWaterMark implements AddWaterMark {
         OutputStream os=new FileOutputStream(path);
         try {
             hwpfDocument.write(os);
+            logger.info("生成doc文档成功！");
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
@@ -75,15 +76,17 @@ public class WordDocAddWaterMark implements AddWaterMark {
         try {
             Document document = new Document();
             document.loadFromFile(sourcePath);
+            document.createParagraph();
             insertTextWatermark(document.getSections().get(0), waterMarkContent);
             document.saveToFile(targetPath, FileFormat.Doc);
-            removeWarnings(sourcePath);
+            removeWarnings(targetPath);
         }catch (Exception e){
             logger.error(e.getMessage());
         }
     }
 
     /**
+     * todo 图片存在问题 除去首行警告后图片水印显示有问题
      * 图片水印
      */
     private void transferPic(String sourcePath, String targetPath) {
@@ -95,8 +98,9 @@ public class WordDocAddWaterMark implements AddWaterMark {
             picture.setScaling(200);
             picture.isWashout(false);
             document.setWatermark(picture);
+            document.getSections();
             document.saveToFile(targetPath, FileFormat.Doc);
-            removeWarnings(sourcePath);
+//            removeWarnings(targetPath);
         }catch (Exception e){
             logger.error(e.getMessage());
         }
